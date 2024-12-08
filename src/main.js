@@ -1,6 +1,6 @@
 import Button from "./components/button";
-import ItemsTable from "./components/items-table";
 import Input from "./components/input";
+import ItemsTable from "./components/items-table";
 import initialItems from "./db";
 import state from "./state";
 
@@ -18,12 +18,12 @@ function render() {
       <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
         <div class="overflow-hidden">
           <form id="itemForm" class="space-x-4 p-4">
-            ${Input({ id: "name", placeholder: "Dish name" })}
-            ${Input({ id: "status", placeholder: "Status" })}
-            ${Input({ id: "assignedTo", placeholder: "Assigned to" })}
-            ${Input({ id: "estimatedTime", placeholder: "Estimated time" })}
-            ${Input({ id: "temperature", placeholder: "Temperature" })}
-            ${Input({ id: "temperature", placeholder: "Temperature" })}
+            ${Input({ id: "id", placeholder: "ID" })}
+            ${Input({ id: "name", placeholder: "Name" })}
+            ${Input({ id: "description", placeholder: "Description" })}
+            ${Input({ id: "price", placeholder: "Price" })}
+            ${Input({ id: "category", placeholder: "Category" })}
+            ${Input({ id: "stock", placeholder: "Stock" })}
             ${Button("submit", "", "Add Dish")}
           </form>
         </div>
