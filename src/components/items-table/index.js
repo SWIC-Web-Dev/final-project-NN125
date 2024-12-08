@@ -5,7 +5,7 @@ export default function DishesTable(items) {
     <table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
       <thead class="border-b border-orange-950 font-medium dark:border-white/10">
         <tr scope="col" class="px-6 py-4">
-          <th>Id</th>
+          <th>ID</th>
           <th>Name</th>
           <th>Description</th>
           <th>Price</th>
