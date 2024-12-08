@@ -1,5 +1,5 @@
-export default function Input({ id, placeholder, addlClasses = "" }) {
+export default function Input({ id, placeholder, additionalClasses = "" }) {
   return `
-    <input id="${id}" class="input ${addlClasses}" type="text" placeholder="${placeholder}" />
+    <input id="${id}" class="input ${additionalClasses}" type="text" placeholder="${placeholder}" />
   `;
 }
