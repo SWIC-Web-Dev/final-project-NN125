@@ -24,6 +24,11 @@ function render() {
 
   app.innerHTML = `
     <div class="max-w-4xl mx-auto p-4">
+      <h1
+      class="m-4 space-y-4 mb-8 text-center text-2xl font-extrabold text-slate-300 sm:text-3xl md:text-4xl lg:text-5xl"
+      >
+      Item Database
+      </h1>
       <form id="itemForm" class="space-y-4 mb-8">
         ${formFields
           .map((field) =>
