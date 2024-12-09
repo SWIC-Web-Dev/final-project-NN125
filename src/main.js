@@ -84,9 +84,9 @@ function render() {
   });
 
   // Attach the delete event listener to the table after rendering
-  const table = document.querySelector("table"); // Adjust this selector based on your actual table structure
+  const table = document.querySelector("table");
   table.addEventListener("click", (event) => {
-    const deleteButton = event.target.closest(".delete-button"); // Adjust the class name as necessary
+    const deleteButton = event.target.closest(".delete-button");
     if (deleteButton) {
       const itemId = deleteButton.closest("tr").dataset.item;
       state.deleteItem(itemId);
