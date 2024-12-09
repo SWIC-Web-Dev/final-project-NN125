@@ -30,7 +30,7 @@ function render() {
       Item Database
       </h1>
       <form id="itemForm" class="space-y-4 mb-8">
-      <div id="error-message" class="text-red-500"></div> <!-- Error message placeholder -->
+      <div id="error-message" class="text-red-500 m-1 text-left text-xl font-bold"></div> <!-- Error message placeholder -->
         ${formFields
           .map((field) =>
             Input({
@@ -88,7 +88,7 @@ function render() {
   table.addEventListener("click", (event) => {
     const deleteButton = event.target.closest(".delete-button"); // Adjust the class name as necessary
     if (deleteButton) {
-      const itemId = deleteButton.closest("tr").dataset.item; // Assuming the item ID is stored in the row's dataset
+      const itemId = deleteButton.closest("tr").dataset.item;
       state.deleteItem(itemId);
     }
   });
