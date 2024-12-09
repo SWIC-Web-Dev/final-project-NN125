@@ -55,6 +55,18 @@ function render() {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    const newId = form.id.value;
+
+    // Check if the ID already exists in the current state
+    const { items } = state.getState();
+    const idExists = items.some((item) => item.id.toString() === newId);
+
+    if (idExists) {
+      // Display an error message (you can customize this as needed)
+      alert("An item with this ID already exists. Please use a different ID.");
+      return; // Prevent submission
+    }
+
     // These come from the input ids. We know they exist because we created them.
     state.addItem({
       id: form.id.value,
