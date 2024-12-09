@@ -30,6 +30,7 @@ function render() {
       Item Database
       </h1>
       <form id="itemForm" class="space-y-4 mb-8">
+      <div id="error-message" class="text-red-500"></div> <!-- Error message placeholder -->
         ${formFields
           .map((field) =>
             Input({
@@ -61,10 +62,14 @@ function render() {
     const { items } = state.getState();
     const idExists = items.some((item) => item.id.toString() === newId);
 
+    const errorMessageElement = document.getElementById("error-message");
+
     if (idExists) {
-      // Display an error message (you can customize this as needed)
-      alert("An item with this ID already exists. Please use a different ID.");
+      errorMessageElement.textContent =
+        "An item with this ID already exists. Please use a different ID.";
       return; // Prevent submission
+    } else {
+      errorMessageElement.textContent = ""; // Clear the error message if the ID is unique
     }
 
     // These come from the input ids. We know they exist because we created them.
