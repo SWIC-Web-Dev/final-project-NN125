@@ -60,13 +60,19 @@ function render() {
       stock: form.stock.value,
     });
   });
+
+  // Attach the delete event listener to the table after rendering
+  const table = document.querySelector("table"); // Adjust this selector based on your actual table structure
+  table.addEventListener("click", (event) => {
+    const deleteButton = event.target.closest(".delete-button"); // Adjust the class name as necessary
+    if (deleteButton) {
+      const itemId = deleteButton.closest("tr").dataset.item; // Assuming the item ID is stored in the row's dataset
+      state.deleteItem(itemId);
+    }
+  });
 }
 
 // We want the render function to run with the new state every time it changes
 state.subscribe(render);
 
 render();
-
-document.addEventListener("click", (event) => {
-  state.deleteItem(event.target.closest("tr").dataset.item);
-});
