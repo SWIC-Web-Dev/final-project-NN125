@@ -41,7 +41,7 @@ export default (() => {
       // Filter out the dish with the given name
       const newItems = state.items.filter(
         // * Be sure to compare the same type of values
-        (item) => item.id !== Number(itemId),
+        (item) => item.id.toString() !== itemId, // Convert item.id to string for comparison
       );
 
       this.setState({ items: newItems });
