@@ -10,54 +10,63 @@ const app = document.querySelector("#app");
 state.setState({ items: initialItems });
 
 function render() {
+  // Destructure the known property from the state
   const { items } = state.getState();
 
+  const formFields = [
+    { id: "id", placeholder: "ID" },
+    { id: "name", placeholder: "Name" },
+    { id: "description", placeholder: "Description" },
+    { id: "price", placeholder: "Price" },
+    { id: "category", placeholder: "Category" },
+    { id: "stock", placeholder: "Stock" },
+  ];
+
   app.innerHTML = `
-  <div class="flex flex-col">
-    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-        <div class="overflow-hidden">
-          <form id="itemForm" class="space-x-4 p-4">
-            ${Input({ id: "id", placeholder: "ID" })}
-            ${Input({ id: "name", placeholder: "Name" })}
-            ${Input({ id: "description", placeholder: "Description" })}
-            ${Input({ id: "price", placeholder: "Price" })}
-            ${Input({ id: "category", placeholder: "Category" })}
-            ${Input({ id: "stock", placeholder: "Stock" })}
-            ${Button("submit", "", "Add Dish")}
-          </form>
-        </div>
-      </div>
+    <div class="max-w-4xl mx-auto p-4">
+      <form id="itemForm" class="space-y-4 mb-8">
+        ${formFields
+          .map((field) =>
+            Input({
+              ...field,
+              additionalClasses: "mb-2",
+            }),
+          )
+          .join("")}
+        
+          ${Button({
+            type: "submit",
+            additionalClasses:
+              "w-full bg-indigo-500 text-white px-4 py-2 hover:bg-indigo-600",
+            text: "Add Item",
+          })}
+      </form>
+      
+      ${ItemsTable(items)}
     </div>
-  </div>
-    
-    ${ItemsTable(items)}
   `;
+  // Attach the event listener to the form after rendering
+  const form = document.getElementById("itemForm");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    // These come from the input ids. We know they exist because we created them.
+    state.addItem({
+      id: form.id.value,
+      name: form.name.value,
+      description: form.description.value,
+      price: form.price.value,
+      category: form.category.value,
+      stock: form.stock.value,
+    });
+  });
 }
 
+// We want the render function to run with the new state every time it changes
 state.subscribe(render);
+
 render();
 
-function handleSubmit(event) {
-  event.preventDefault();
-  const form = event.target;
-
-  state.addItem(
-    form.name.value,
-    form.status.value,
-    form.assignedTo.value,
-    form.estimatedTime.value,
-    form.temperature.value,
-  );
-  form.reset();
-
-  // Trigger a re-render
-  state.setState({ items: state.getState().items });
-}
-
-// Attach the event listener to the form after rendering
-document.addEventListener("submit", (event) => {
-  if (event.target.id === "itemForm") {
-    handleSubmit(event);
-  }
+document.addEventListener("click", (event) => {
+  state.deleteItem(event.target.closest("tr").dataset.item);
 });
