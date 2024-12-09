@@ -1,12 +1,22 @@
-export default function ItemRow(item) {
+import Button from "../button.js";
+
+export default function ItemRow({
+  id,
+  name,
+  description,
+  price,
+  category,
+  stock,
+}) {
   return `
-    <tr>
-      <td>${item.id}</td>
-      <td>${item.name}</td>
-      <td>${item.description}</td>
-      <td>${item.price}</td>
-      <td>${item.category}</td>
-      <td>${item.stock}</td>
+    <tr class="border-b *:p-2" data-dish=${id}>
+      <td>${id}</td>
+      <td>${name}</td>
+      <td>${description}</td>
+      <td>${price}</td>
+      <td>${category}</td>
+      <td>${stock}</td>
+      <td>${Button({ text: "Delete", additionalClasses: "bg-red-500 rounded text-white px-2 py-1" })}</td>
     </tr>
   `;
 }
