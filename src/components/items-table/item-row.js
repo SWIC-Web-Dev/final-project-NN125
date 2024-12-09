@@ -9,7 +9,7 @@ export default function ItemRow({
   stock,
 }) {
   return `
-    <tr class="border-b *:p-2" data-item=${id}>
+    <tr class="border-b *:p-2 bg-gray-50" data-item=${id}>
       <td>${id}</td>
       <td>${name}</td>
       <td>${description}</td>
