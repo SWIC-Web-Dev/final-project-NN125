@@ -1,5 +1,8 @@
 export default (() => {
+  // Establishes private state
   let state = { items: [] };
+
+  // List of listeners to be called when the state changes
   const listeners = [];
 
   return {
@@ -8,20 +11,40 @@ export default (() => {
     },
     setState(newState) {
       state = newState;
-      listeners.map((listener) => listener(state));
+
+      // Call all listeners to notify them that the state has changed
+      listeners.forEach((listener) => {
+        listener(state);
+      });
     },
     subscribe(listener) {
       listeners.push(listener);
     },
-    addItem(id, name, description, price, category, stock) {
-      state.items.push({
-        id,
-        name,
-        description,
-        price,
-        category,
-        stock,
-      });
+    addItem({ id, name, description, price, category, stock }) {
+      // Update the state by mixing the new dish with the existing dishes
+      const newItems = [
+        ...state.items,
+        {
+          id,
+          name,
+          description,
+          price,
+          category,
+          stock,
+        },
+      ];
+
+      // Update the state
+      this.setState({ items: newItems });
+    },
+    deleteItem(itemId) {
+      // Filter out the dish with the given name
+      const newItems = state.items.filter(
+        // * Be sure to compare the same type of values
+        (item) => item.id !== Number(itemId),
+      );
+
+      this.setState({ items: newItems });
     },
   };
 })();
