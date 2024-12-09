@@ -1,10 +1,10 @@
 import ItemRow from "./item-row";
 
-export default function DishesTable(items) {
+export default function ItemsTable(items) {
   return `
-    <table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
-      <thead class="border-b border-orange-950 font-medium dark:border-white/10">
-        <tr scope="col" class="px-6 py-4">
+    <table class="w-full mt-4 border-collapse border">
+      <thead class="bg-gray-100">
+        <tr class="*:p-2 *:text-left">
           <th>ID</th>
           <th>Name</th>
           <th>Description</th>
@@ -14,7 +14,7 @@ export default function DishesTable(items) {
         </tr>
       </thead>
       <tbody>
-        ${items.map(ItemRow).join("")}
+        ${items.map((item) => ItemRow(item)).join("")}
       </tbody>
     </table>
   `;
